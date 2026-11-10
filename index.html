@@ -4,10 +4,148 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
+    <link rel="stylesheet" href="css/style.css">
     <script type="module" src="js/main.js" defer></script>
     <title>Mizan - c'est une platform qui gére... </title>
 </head>
 <body>
-    
+    <header>
+        <nav>
+            <div class="header">
+                <div class="title">
+                    <h1>MIZAN   |   Cours de l'or</h1>
+                </div>
+
+                <div class="select-actualiser">
+                    <select name="curreuncy" id="curreuncy">
+                        <option value="mad">MAD</option>
+                        <option value="usd">USD</option>
+                        <option value="eur">EUR</option>
+                    </select>
+
+                    <div id="actualiser" class="actualiser">
+                        <button>Actualiser</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <div id="date-update" class="date-update">
+                Dernière mise à jour: <div id="date"></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="cards">
+                <div class="or-card">
+                    <div>
+                        <h3>Or</h3>
+                    </div>
+
+                    <div id="or-price-info" class="or-price-info">
+                    </div>
+
+                    <div id="or-all-info" class="or-all-info">
+                    </div>
+                </div>
+
+                <div class="money-card">
+                    <div>
+                        <h3>Argent</h3>
+                    </div>
+
+                    <div id="money-price-info" class="money-price-info">
+                    </div>
+
+                    <div id="money-all-info" class="money-all-info">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-2">
+                <div class="title-estimer">Estimer la valeur d'un bijou</div>
+                <form id="form">
+                    <div>
+                        <label for="poids" class="poids-label">Poids (en grammes)</label><br>
+                        <input type="number" name="poids" id="poids" class="poids">
+                    </div>
+
+                    <div>
+                        <label for="metal" class="metal-label">Métal</label><br>
+                        <select name="metal" id="metal" class="metal">
+                            <option value="or">Or</option>
+                            <option value="argent">Argent</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="submit-button">Calculer</button>
+                    </div>
+                </form>
+
+                <div id="result" class="result"></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-3">
+
+                <div class="historique-title">
+                    <h2>Historique des prix</h2>
+                </div>
+
+                <div class="historique-controls">
+                    <select name="history-metal" id="history-metal">
+                        <option value="gold">Or</option>
+                        <option value="silver">Argent</option>
+                    </select>
+
+                    <select name="history-period" id="history-period">
+                        <option value="7">7 derniers jours</option>
+                        <option value="30">30 derniers jours</option>
+                    </select>
+                </div>
+
+                <div id="history-chart" class="history-chart"
+                    role="img"
+                    aria-label="Graphique de l'historique des prix">
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <div class="section-4">
+
+                <div class="api-info">
+                    <p>
+                        Données fournies par
+                        <strong>xaus.com</strong>
+                    </p>
+                </div>
+
+                <details id="request-log" class="request-log">
+
+                    <summary>Voir les dernières requêtes</summary>
+
+                    <div class="request-log-content">
+
+                        <h3>Journal des requêtes</h3>
+
+                        <div id="request-log-list">
+                        </div>
+
+                    </div>
+
+                </details>
+
+            </div>
+        </section>
+    </main>
 </body>
 </html>
