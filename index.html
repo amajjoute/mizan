@@ -34,7 +34,7 @@
     <main>
         <section>
             <div id="date-update" class="date-update">
-                Dernière mise à jour: 
+                Dernière mise à jour: <div id="date"></div>
             </div>
         </section>
 
@@ -67,32 +67,85 @@
         </section>
 
         <section>
-            <div class="title-estimer">Estimer la valeur d'un bijou</div>
-            <form id="form">
-                <div>
-                    <label for="poids" class="poids-label">Poids (en grammes)</label><br>
-                    <input type="number" name="poids" id="poids" class="poids">
-                </div>
+            <div class="section-2">
+                <div class="title-estimer">Estimer la valeur d'un bijou</div>
+                <form id="form">
+                    <div>
+                        <label for="poids" class="poids-label">Poids (en grammes)</label><br>
+                        <input type="number" name="poids" id="poids" class="poids">
+                    </div>
 
-                <div>
-                    <label for="metal" class="metal-label">Métal</label><br>
-                    <select name="metal" id="metal" class="metal">
-                        <option value="or">Or</option>
-                        <option value="argent">Argent</option>
-                    </select>
-                </div>
+                    <div>
+                        <label for="metal" class="metal-label">Métal</label><br>
+                        <select name="metal" id="metal" class="metal">
+                            <option value="or">Or</option>
+                            <option value="argent">Argent</option>
+                        </select>
+                    </div>
 
-                <div>
-                    <button type="submit" class="submit-button">Calculer</button>
-                </div>
-            </form>
-            <div id="result" class="result"></div>
+                    <div>
+                        <button type="submit" class="submit-button">Calculer</button>
+                    </div>
+                </form>
+
+                <div id="result" class="result"></div>
+            </div>
         </section>
 
         <section>
+            <div class="section-3">
+
+                <div class="historique-title">
+                    <h2>Historique des prix</h2>
+                </div>
+
+                <div class="historique-controls">
+                    <select name="history-metal" id="history-metal">
+                        <option value="gold">Or</option>
+                        <option value="silver">Argent</option>
+                    </select>
+
+                    <select name="history-period" id="history-period">
+                        <option value="7">7 derniers jours</option>
+                        <option value="30">30 derniers jours</option>
+                    </select>
+                </div>
+
+                <div id="history-chart" class="history-chart"
+                    role="img"
+                    aria-label="Graphique de l'historique des prix">
+                </div>
+
+            </div>
         </section>
 
-        <section></section>
+        <section>
+            <div class="section-4">
+
+                <div class="api-info">
+                    <p>
+                        Données fournies par
+                        <strong>xaus.com</strong>
+                    </p>
+                </div>
+
+                <details id="request-log" class="request-log">
+
+                    <summary>Voir les dernières requêtes</summary>
+
+                    <div class="request-log-content">
+
+                        <h3>Journal des requêtes</h3>
+
+                        <div id="request-log-list">
+                        </div>
+
+                    </div>
+
+                </details>
+
+            </div>
+        </section>
     </main>
 </body>
 </html>
