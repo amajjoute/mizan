@@ -10,30 +10,31 @@
 </head>
 <body>
     <header>
-        <div class="header">
-            <div class="title">
-                <h1>MIZAN   |   </h1>
-                <p>Cours de l'or</p>
-            </div>
+        <nav>
+            <div class="header">
+                <div class="title">
+                    <h1>MIZAN   |   Cours de l'or</h1>
+                </div>
 
-            <div class="select-actualiser">
-                <select name="curreuncy" id="curreuncy">
-                    <option value="mad">MAD</option>
-                    <option value="usd">USD</option>
-                    <option value="eur">EUR</option>
-                </select>
+                <div class="select-actualiser">
+                    <select name="curreuncy" id="curreuncy">
+                        <option value="mad">MAD</option>
+                        <option value="usd">USD</option>
+                        <option value="eur">EUR</option>
+                    </select>
 
-                <div id="actualiser" class="actualiser">
-                    <button>Actualiser</button>
+                    <div id="actualiser" class="actualiser">
+                        <button>Actualiser</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </nav>
     </header>
 
     <main>
         <section>
             <div id="date-update" class="date-update">
-                <p>Dernière mise à jour : </p>
+                Dernière mise à jour: 
             </div>
         </section>
 
@@ -65,7 +66,31 @@
             </div>
         </section>
 
-        <section></section>
+        <section>
+            <div class="title-estimer">Estimer la valeur d'un bijou</div>
+            <form id="form">
+                <div>
+                    <label for="poids" class="poids-label">Poids (en grammes)</label><br>
+                    <input type="number" name="poids" id="poids" class="poids">
+                </div>
+
+                <div>
+                    <label for="metal" class="metal-label">Métal</label><br>
+                    <select name="metal" id="metal" class="metal">
+                        <option value="or">Or</option>
+                        <option value="argent">Argent</option>
+                    </select>
+                </div>
+
+                <div>
+                    <button type="submit" class="submit-button">Calculer</button>
+                </div>
+            </form>
+            <div id="result" class="result"></div>
+        </section>
+
+        <section>
+        </section>
 
         <section></section>
     </main>
