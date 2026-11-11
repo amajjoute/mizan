@@ -10,7 +10,7 @@ export async function getPrices(currency) {
         price: Number(data.xau.price.toFixed(2)),
         currency: data.xau.currency,
         unit: "gram",
-        updateAt: data.updated_at
+        updatedAt: data.updated_at
     };
 
     const silver = {
@@ -18,7 +18,7 @@ export async function getPrices(currency) {
         price: Number(((data.silver_usd_oz * data.fx_rate) / TROY_OUNCE_IN_GRAM).toFixed(2)),
         currency: currency,
         unit: "gram",
-        updateAt: data.updated_at
+        updatedAt: data.updated_at
     };
 
     return [gold, silver];
