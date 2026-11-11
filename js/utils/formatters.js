@@ -1,26 +1,23 @@
-import { getPrices } from "../modules/prices.js";
+function formatPrice(price, currency) {
 
-
-export async function formatPrice(currency) {
-    const data = await getPrices(currency);
-
-    const dataPriceGold = data[0].price;
-    const dataPriceSilver = data[1].price;
-
-    const numberFormatGoldPrice = new Intl.NumberFormat("fr-FR", {
+    const numberFormatPrice = new Intl.NumberFormat("fr-FR", {
             style: "currency",
             currency: currency
         }
     );
 
-    const numberFormatSilverPrice = new Intl.NumberFormat("fr-FR", {
-            style: "currency",
-            currency: currency
-        }
-    );
+    const formattedPrice = numberFormatPrice.format(price);
 
-    const formattedPriceGold = numberFormatGoldPrice.format(dataPriceGold);
-    const formattedPriceSilver = numberFormatSilverPrice.format(dataPriceSilver);
+    return formattedPrice;
 
-    return [ formattedPriceGold, formattedPriceSilver];
 }
+
+function formatDate(date) {
+
+    const  formattedDate = new Date(date).toLocaleString("fr-FR");
+    
+    return formattedDate;
+
+}
+
+export { formatPrice, formatDate };
