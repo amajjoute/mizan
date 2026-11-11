@@ -1,4 +1,4 @@
-import { getData } from "../services/api";
+import { getData } from "../services/api.js";
 
 const TROY_OUNCE_IN_GRAM = 31.1035;
 
@@ -7,9 +7,19 @@ export async function getPrices(currency) {
 
     const gold = {
         name: "Or",
-        price: data.xau.price,
+        price: Number(data.xau.price.toFixed(2)),
         currency: data.xau.currency,
         unit: "gram",
         updateAt: data.updated_at
-    }
+    };
+
+    const silver = {
+        name: "Argent",
+        price: Number(((data.silver_usd_oz * data.fx_rate) / TROY_OUNCE_IN_GRAM).toFixed(2)),
+        currency: currency,
+        unit: "gram",
+        updateAt: data.updated_at
+    };
+
+    return [gold, silver];
 }
