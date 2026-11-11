@@ -17,10 +17,3 @@ export async function getData(currency) {
 
     return data;
 }
-
-const data = await getData("USD");
-
-console.log("Gold:", data.xau.price);
-console.log("Currency:", data.xau.currency);
-console.log("Updated:", data.updated_at);
-console.log("Silver:", data.silver_usd_oz);
