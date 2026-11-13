@@ -31,7 +31,7 @@ export async function renderCards(currency) {
             sign = "+";
         } else if (metal.direction === "down") {
             arrow = "↓";
-            sign = "-";
+            // sign = "-";
         }
 
         const formattedVariation = formatPrice(
