@@ -18,14 +18,19 @@ async function getData(currency) {
     return data;
 }
 
-async function getHistoricalData(symbol) {
+async function getHistoricalData(symbol, period) {
     const allowedSymbols = ["xau", "silver"];
+    const allowedPeriods = ["7d", "30d"]
+
+    if (!allowedPeriods.includes(period)) {
+        throw new Error("Unsupported period");
+    }
 
     if (!allowedSymbols.includes(symbol)) {
         throw new Error("Unsupported symbol");
     }
 
-    const response = await fetch(`https://xaus.com/api/v1/chart?symbol=${symbol}&range=5d&interval=1d`);
+    const response = await fetch(`https://xaus.com/api/v1/chart?symbol=${symbol}&range=${period}&interval=1d`);
 
     if (!response.ok) {
         throw new Error(`HTTP Error: ${response.status}`);
