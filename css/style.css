@@ -50,6 +50,40 @@ header {
     padding: 20px 0;
 }
 
+.metal-card {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    color: #1f2937;
+}
+
+.metal-card h3 {
+    color: #374151;
+}
+
+.metal-price {
+    color: #111827;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.metal-variation {
+    font-weight: 600;
+}
+
+.metal-card--up .metal-variation {
+    color: #16a34a;
+}
+
+.metal-card--down .metal-variation {
+    color: #dc2626;
+}
+
+.metal-card--neutral .metal-variation {
+    color: #6b7280;
+}
+
 nav {
     width: 95%;
     max-width: 1400px;

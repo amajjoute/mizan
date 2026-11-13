@@ -1,6 +1,6 @@
 import { renderCards } from "./ui/cards.js";
 
-const currency = document.querySelector("#curreuncy");
+const currency = document.querySelector("#currency");
 const refreshButton = document.querySelector("#actualiser")
 
 renderCards(currency.value);
