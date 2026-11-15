@@ -22,3 +22,13 @@ const historyChart = new Chart(chartCanvas, {
         maintainAspectRatio: false
     }
 });
+
+export function updateHistoryChart(points) {
+    historyChart.data.labels = points.map(point =>
+        new Date(point.t * 1000).toLocaleDateString("fr-FR")
+    );
+
+    historyChart.data.datasets[0].data = points.map(point => point.c);
+
+    historyChart.update();
+}
