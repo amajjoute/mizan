@@ -1,6 +1,7 @@
 import Chart from 'chart.js/auto';
+import { getHistory } from "../services/api.js";
 
-const chartContainer = document.querySelector("#history-canvas");
+const chartCanvas = document.querySelector("#history-canvas");
 
 const historyChart = new Chart(chartCanvas, {
     type: "line",
@@ -19,7 +20,16 @@ const historyChart = new Chart(chartCanvas, {
 
     options: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+
+        scales: {
+            y: {
+                title: {
+                    display: true,
+                    text: "Prix"
+                }
+            }
+        }
     }
 });
 
@@ -32,3 +42,15 @@ export function updateHistoryChart(points) {
 
     historyChart.update();
 }
+
+export async function loadHistoryChart(symbol, period) {
+    try {
+        const history = await getHistory(symbol, period);
+
+        updateHistoryChart(history.points);
+
+    } catch (error) {
+        console.error("Error loading history chart:", error);
+    }
+}
+
