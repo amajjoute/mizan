@@ -25,3 +25,7 @@ export async function variationAndPercentage(symbol) {
 
     return [Number(variation.toFixed(2)), Number(percentage.toFixed(2))];
 }
+
+export function calculateEstimatedValue(weight, price) {
+    return weight * price;
+}
