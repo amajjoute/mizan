@@ -34,15 +34,11 @@ async function getHistory(symbol, period) {
         throw new Error(`Unsupported period!`);
     }
 
-    const response = await fetch(`https://xaus.com/api/v1/chart?symbol=${symbol}&range=${period}&interval=1d`);
+    const url = `https://xaus.com/api/v1/chart?symbol=${symbol}&range=${period}&interval=1d`;
 
-    if (!response.ok) {
-        throw new Error(`HTTP Error: ${response.status}`);
-    }
+    const result = await fetchData(url);
 
-    const result = await response.json();
-
-    const days = Number(parseInt(period.replace("d", "")));
+    const days = Number(parseInt(period));
 
     const latestTimeStamp = result.points[result.points.length - 1].t;
     const startTimeStamp = latestTimeStamp - days * 86400;
