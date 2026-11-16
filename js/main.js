@@ -14,6 +14,7 @@ if (savedCurrency) {
 }
 
 renderCards(currency.value);
+loadHistoryChart(historyMetal.value, historyPeriod.value);
 
 currency.addEventListener("change", () => {
     renderCards(currency.value);
