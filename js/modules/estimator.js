@@ -7,15 +7,32 @@ const weightInput = document.querySelector("#poids");
 const metalSelect = document.querySelector("#metal");
 const result = document.querySelector("#result");
 
-form.addEventListener("submit", async (event) => {
-    event.preventDefault();
+export function initEstimator() {
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-    const weight = Number(weightInput.value);
+        const weight = Number(weightInput.value);
 
-    if (!weightInput.value || !Number.isFinite(weight) || weight <= 0) {
-        result.textContent = "Veuillez saisir un poids valide.";
-        return;
-    }
+        if (!weightInput.value || !Number.isFinite(weight) || weight <= 0) {
+            result.textContent = "Veuillez saisir un poids valide.";
+            return;
+        }
 
-    result.textContent = "";
-});
+        result.textContent = "";
+
+        const currency = document.querySelector("#currency").value;
+        const selectedMetal = metalSelect.value;
+
+        const prices = await getPrices(currency);
+
+        const metalIndex = selectedMetal === "xau" ? 0 : 1;
+        const metal = prices[metalIndex];
+
+        const estimatedValue = calculateEstimatedValue(
+            weight,
+            metal.price
+        );
+
+        result.textContent = formatPrice(estimatedValue, currency);
+    });
+}
