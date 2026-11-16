@@ -71,4 +71,42 @@ async function getHistory(symbol, period) {
     }
 }
 
-export { getData, getHistoricalData, getHistory };
+async function fetchData(url) {
+    if (!navigator.onLine) {
+        throw new Error("OFFLINE");
+    }
+
+    let response;
+
+    try {
+        response = await fetch(url);
+    } catch (error) {
+        if (!navigator.onLine) {
+            throw new Error("OFFLINE");
+        }
+
+        throw new Error("NETWORK_ERROR");
+    }
+
+    if (!response.ok) {
+        if (response.status === 429) {
+            throw new Error("Too_Many_Requests");
+        }
+
+        if (response.status >= 400 && response.status < 500) {
+            throw new Error("HTTP_Client_ERROR");
+        }
+
+        if (response.status >= 500) {
+            throw new Error("HTTP_Server_ERROR");
+        }
+    }
+
+    try {
+        return await response.json();
+    } catch (error) {
+        throw new Error("Parsing_Fails_Invalid_JSON");
+    }
+}
+
+export { getData, getHistoricalData, getHistory, fetchData };
