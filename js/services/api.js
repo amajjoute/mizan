@@ -17,15 +17,9 @@ async function getHistoricalData(symbol) {
         throw new Error("Unsupported symbol");
     }
 
-    const response = await fetch(`https://xaus.com/api/v1/chart?symbol=${symbol}&range=5d&interval=1d`);
+    const url = `https://xaus.com/api/v1/chart?symbol=${symbol}&range=5d&interval=1d`;
 
-    if (!response.ok) {
-        throw new Error(`HTTP Error: ${response.status}`);
-    }
-
-    const result = await response.json();
-
-    return result;
+    return await fetchData(url);
 }
 
 async function getHistory(symbol, period) {
