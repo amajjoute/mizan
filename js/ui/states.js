@@ -1,5 +1,10 @@
 const errorMessages = {
-    
+    OFFLINE: "Vous êtes hors ligne. Vérifiez votre connexion.",
+    NETWORK_ERROR: "Erreur réseau. Impossible de contacter le serveur.",
+    HTTP_Client_ERROR: "Erreur HTTP : requête incorrecte (4xx).",
+    HTTP_Server_ERROR: "Erreur serveur (5xx). Réessayez plus tard.",
+    Too_Many_Requests: "Quota API dépassé. Réessayez plus tard.",
+    Parsing_Fails_Invalid_JSON: "La réponse du serveur est illisible."
 }
 
 function showLoading(container, message) {
