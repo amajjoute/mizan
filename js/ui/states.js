@@ -39,3 +39,9 @@ function showError(container, error, retryCallback) {
 
     container.append(text, retryButton);
 }
+
+function clearStatus(container) {
+    container.replaceChildren();
+}
+
+export { showLoading, showSuccess, showError, clearStatus }
