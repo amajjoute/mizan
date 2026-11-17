@@ -1,5 +1,6 @@
 import { renderCards } from "./ui/cards.js";
 import { loadHistoryChart } from "./ui/chart.js";
+import { initEstimator } from "./modules/estimator.js";
 
 const currency = document.querySelector("#currency");
 const refreshButton = document.querySelector("#actualiser");
@@ -21,9 +22,8 @@ currency.addEventListener("change", () => {
 });
 
 refreshButton.addEventListener("click", () => {
-    console.log("Refresh clicked");
     localStorage.setItem("currency", currency.value);
-    renderCards(currency.value);
+    renderCards(currency.value, true);
 });
 
 historyMetal.addEventListener("change", () => {
@@ -33,3 +33,5 @@ historyMetal.addEventListener("change", () => {
 historyPeriod.addEventListener("change", () => {
     loadHistoryChart(historyMetal.value, historyPeriod.value);
 });
+
+initEstimator();
