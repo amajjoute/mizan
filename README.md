@@ -152,19 +152,19 @@ Les erreurs sont ensuite traduites en messages compréhensibles pour l'utilisate
 Ajouter ici les captures d'écran de l'application :
 
 ### Interface principale
-[Ajouter une capture d'écran]
+![Dashboard](img/interface_principal.png)
 
 ### Historique des prix
-[Ajouter une capture d'écran]
+![History](img/historique.png)
 
 ### Estimateur de bijoux
-[Ajouter une capture d'écran]
+![Estimator](estimateur_bijou.png)
 
 ### États des requêtes
 
-- Chargement : [Ajouter une capture]
-- Succès : [Ajouter une capture]
-- Erreur : [Ajouter une capture]
+- Chargement : ![Loading](img/chargement.png)
+- Succès : ![Success](img/success.png)
+- Erreur : ![Error](img/error.png)
 
 ## 9. Installation et lancement
 

@@ -22,9 +22,8 @@ currency.addEventListener("change", () => {
 });
 
 refreshButton.addEventListener("click", () => {
-    console.log("Refresh clicked");
     localStorage.setItem("currency", currency.value);
-    renderCards(currency.value);
+    renderCards(currency.value, true);
 });
 
 historyMetal.addEventListener("change", () => {

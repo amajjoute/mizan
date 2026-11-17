@@ -2,11 +2,17 @@ import { getPrices } from "../modules/prices.js";
 import { formatPrice, formatDate } from "../utils/formatters.js";
 import { showLoading, showError, showSuccess } from "./states.js";
 
+const refreshButton = document.querySelector("#actualiser button");
 const pricesStatus = document.querySelector("#prices-status");
 const cardsContainer = document.querySelector("#cards");
 const date = document.querySelector("#date");
 
-export async function renderCards(currency) {
+export async function renderCards(currency, disableRefresh = false) {
+
+    if (disableRefresh) {
+        refreshButton.disabled = true;
+    }
+
     showLoading(pricesStatus, "Chargement des prix...");
 
     try {
@@ -58,5 +64,9 @@ export async function renderCards(currency) {
         showError(pricesStatus, error, () => {
             renderCards(currency);
         });
+    } finally {
+        if (disableRefresh) {
+            refreshButton.disabled = false;
+        }
     }
 }
