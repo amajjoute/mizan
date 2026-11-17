@@ -10,7 +10,7 @@ const errorMessages = {
 function showLoading(container, message) {
     container.replaceChildren();
 
-    const text = document.querySelector("p");
+    const text = document.createElement("p");
     text.textContent = message;
 
     container.appendChild(text);
@@ -19,7 +19,7 @@ function showLoading(container, message) {
 function showSuccess(container, message) {
     container.replaceChildren();
 
-    const text = document.querySelector("p");
+    const text = document.createElement("p");
     text.textContent = message;
 
     container.appendChild(text);

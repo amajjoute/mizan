@@ -1,50 +1,62 @@
 import { getPrices } from "../modules/prices.js";
 import { formatPrice, formatDate } from "../utils/formatters.js";
+import { showLoading, showError, showSuccess } from "./states.js";
 
+const pricesStatus = document.querySelector("#prices-status");
 const cardsContainer = document.querySelector("#cards");
 const date = document.querySelector("#date");
 
 export async function renderCards(currency) {
-    const currencyPrices = await getPrices(currency);
+    showLoading(pricesStatus, "Chargement des prix...");
 
-    cardsContainer.replaceChildren();
+    try {
+        const currencyPrices = await getPrices(currency);
 
-    currencyPrices.forEach((metal) => {
-        const card = document.createElement("article");
-        card.classList.add("metal-card", `metal-card--${metal.direction}`);
+        cardsContainer.replaceChildren();
 
-        const name = document.createElement("h3");
-        name.textContent = metal.name;
+        currencyPrices.forEach((metal) => {
+            const card = document.createElement("article");
+            card.classList.add("metal-card", `metal-card--${metal.direction}`);
 
-        const price = document.createElement("p");
-        price.classList.add("metal-price");
-        price.textContent = formatPrice(metal.price, currency);
+            const name = document.createElement("h3");
+            name.textContent = metal.name;
 
-        const variation = document.createElement("p");
-        variation.classList.add("metal-variation");
+            const price = document.createElement("p");
+            price.classList.add("metal-price");
+            price.textContent = formatPrice(metal.price, currency);
 
-        let arrow = "→";
-        let sign = "";
+            const variation = document.createElement("p");
+            variation.classList.add("metal-variation");
 
-        if (metal.direction === "up") {
-            arrow = "↑";
-            sign = "+";
-        } else if (metal.direction === "down") {
-            arrow = "↓";
-            // sign = "-";
-        }
+            let arrow = "→";
+            let sign = "";
 
-        const formattedVariation = formatPrice(
-            Math.abs(metal.variation),
-            currency
-        );
+            if (metal.direction === "up") {
+                arrow = "↑";
+                sign = "+";
+            } else if (metal.direction === "down") {
+                arrow = "↓";
+                // sign = "-";
+            }
 
-        variation.textContent =
-            `${arrow} ${sign}${formattedVariation} (${sign}${metal.percentage}%)`;
+            const formattedVariation = formatPrice(
+                Math.abs(metal.variation),
+                currency
+            );
 
-        card.append(name, price, variation);
-        cardsContainer.appendChild(card);
-    });
+            variation.textContent =
+                `${arrow} ${sign}${formattedVariation} (${sign}${metal.percentage}%)`;
 
-    date.textContent = formatDate(currencyPrices[0].updatedAt);
+            card.append(name, price, variation);
+            cardsContainer.appendChild(card);
+        });
+
+        date.textContent = formatDate(currencyPrices[0].updatedAt);
+
+        showSuccess(pricesStatus, "Prix actualisés avec succès.");
+    } catch (error) {
+        showError(pricesStatus, error, () => {
+            renderCards(currency);
+        });
+    }
 }
