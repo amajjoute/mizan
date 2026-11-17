@@ -24,3 +24,18 @@ function showSuccess(container, message) {
 
     container.appendChild(text);
 }
+
+function showError(container, error, retryCallback) {
+    container.replaceChildren();
+
+    const text = document.createElement("p");
+    text.textContent = errorMessages[error.message] || error.message;
+
+    const retryButton = document.createElement("button");
+    retryButton.textContent = "Réessayer";
+    retryButton.type = "button";
+
+    retryButton.addEventListener("click", retryCallback);
+
+    container.append(text, retryButton);
+}
