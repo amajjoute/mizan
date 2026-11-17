@@ -1,50 +1,72 @@
 import { getPrices } from "../modules/prices.js";
 import { formatPrice, formatDate } from "../utils/formatters.js";
+import { showLoading, showError, showSuccess } from "./states.js";
 
+const refreshButton = document.querySelector("#actualiser button");
+const pricesStatus = document.querySelector("#prices-status");
 const cardsContainer = document.querySelector("#cards");
 const date = document.querySelector("#date");
 
-export async function renderCards(currency) {
-    const currencyPrices = await getPrices(currency);
+export async function renderCards(currency, disableRefresh = false) {
 
-    cardsContainer.replaceChildren();
+    if (disableRefresh) {
+        refreshButton.disabled = true;
+    }
 
-    currencyPrices.forEach((metal) => {
-        const card = document.createElement("article");
-        card.classList.add("metal-card", `metal-card--${metal.direction}`);
+    showLoading(pricesStatus, "Chargement des prix...");
 
-        const name = document.createElement("h3");
-        name.textContent = metal.name;
+    try {
+        const currencyPrices = await getPrices(currency);
 
-        const price = document.createElement("p");
-        price.classList.add("metal-price");
-        price.textContent = formatPrice(metal.price, currency);
+        cardsContainer.replaceChildren();
 
-        const variation = document.createElement("p");
-        variation.classList.add("metal-variation");
+        currencyPrices.forEach((metal) => {
+            const card = document.createElement("article");
+            card.classList.add("metal-card", `metal-card--${metal.direction}`);
 
-        let arrow = "→";
-        let sign = "";
+            const name = document.createElement("h3");
+            name.textContent = metal.name;
 
-        if (metal.direction === "up") {
-            arrow = "↑";
-            sign = "+";
-        } else if (metal.direction === "down") {
-            arrow = "↓";
-            // sign = "-";
+            const price = document.createElement("p");
+            price.classList.add("metal-price");
+            price.textContent = formatPrice(metal.price, currency);
+
+            const variation = document.createElement("p");
+            variation.classList.add("metal-variation");
+
+            let arrow = "→";
+            let sign = "";
+
+            if (metal.direction === "up") {
+                arrow = "↑";
+                sign = "+";
+            } else if (metal.direction === "down") {
+                arrow = "↓";
+                // sign = "-";
+            }
+
+            const formattedVariation = formatPrice(
+                Math.abs(metal.variation),
+                currency
+            );
+
+            variation.textContent =
+                `${arrow} ${sign}${formattedVariation} (${sign}${metal.percentage}%)`;
+
+            card.append(name, price, variation);
+            cardsContainer.appendChild(card);
+        });
+
+        date.textContent = formatDate(currencyPrices[0].updatedAt);
+
+        showSuccess(pricesStatus, "Prix actualisés avec succès.");
+    } catch (error) {
+        showError(pricesStatus, error, () => {
+            renderCards(currency);
+        });
+    } finally {
+        if (disableRefresh) {
+            refreshButton.disabled = false;
         }
-
-        const formattedVariation = formatPrice(
-            Math.abs(metal.variation),
-            currency
-        );
-
-        variation.textContent =
-            `${arrow} ${sign}${formattedVariation} (${sign}${metal.percentage}%)`;
-
-        card.append(name, price, variation);
-        cardsContainer.appendChild(card);
-    });
-
-    date.textContent = formatDate(currencyPrices[0].updatedAt);
+    }
 }
