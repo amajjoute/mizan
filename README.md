@@ -155,10 +155,10 @@ Ajouter ici les captures d'écran de l'application :
 ![Dashboard](img/interface_principal.png)
 
 ### Historique des prix
-![History](img/historique.png)
+![History](img/historique_prix.png)
 
 ### Estimateur de bijoux
-![Estimator](estimateur_bijou.png)
+![Estimator](img/estimateur_bijou.png)
 
 ### États des requêtes
 
